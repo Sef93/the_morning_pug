@@ -4,6 +4,7 @@
   "description": "The Morning Pug",
   "main": "index.js",
   "scripts": {
+	"start" : "node index.js", 
     "test": "test"
   },
   "repository": {
