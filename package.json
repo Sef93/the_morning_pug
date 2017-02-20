@@ -1,0 +1,25 @@
+{
+  "name": "themorningpug",
+  "version": "1.0.0",
+  "description": "The Morning Pug",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "the_morning_pug"
+  },
+  "keywords": [
+    "pug",
+    "morning"
+  ],
+  "author": "Oliver",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "request": "^2.79.0",
+	"mysql": "^2.5.4"
+  }
+}
