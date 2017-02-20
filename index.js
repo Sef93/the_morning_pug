@@ -114,7 +114,6 @@ function findBestMessage(kuldoId, szoveg, senderId) {
 // generic function sending messages
 function sendMessage(recipientId, message) {
 	console.log();
-	console.log();
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
