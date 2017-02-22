@@ -53,7 +53,7 @@ function init(kuldoId, message) {
     } else {
         connection.query("SELECT * from myUsers where messageId = '" + kuldoId + "'", function(err, rows, field) {
             if (rows[0].last_command == "name") {
-                connection.query("UPDATE myUsers SET name ='" + message + " where messageId = '" + kuldoId + "';");
+                connection.query("UPDATE myUsers SET name ='" + message + "' where messageId = '" + kuldoId + "';");
                 askForSub(kuldoId);
                 return;
             }
