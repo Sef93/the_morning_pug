@@ -47,6 +47,7 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
+    console.log("is it in it?", isItIn(kuldoId));
     if (isItIn(kuldoId) == "none") {
         console.log("i gonna add a new user");
         connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name';"));
@@ -80,8 +81,7 @@ function isItIn(senderId) {
             return rows[0].name;
         } else {
             console.log("nincs benne");
-            string = "none";
-            return string;
+            return "none";
         }
     })
 }
