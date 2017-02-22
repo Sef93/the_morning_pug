@@ -34,7 +34,7 @@ app.post('/webhook', function(req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        if (event.message && event.message.text) {
+        if (event.message && event.message.text && event.sender.id != 724239601085737) {
             init(event.sender.id, event.message.id);
             console.log("events: ", events);
         } else {
@@ -78,7 +78,7 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 // generic function sending messages
 function isItIn(senderId) {
     connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
-        console.log(err, rows, field);
+        console.log(rows);
         if (!err) {
             if (rows.length != 0) {
                 console.log("A felhasználó benne van az adatbázisban");
