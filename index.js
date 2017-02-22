@@ -78,6 +78,7 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 // generic function sending messages
 function isItIn(senderId) {
     connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
+        console.log(err, rows, field);
         if (!err) {
             if (rows[0]) {
                 console.log("A felhasználó benne van az adatbázisban");
