@@ -34,7 +34,7 @@ app.post('/webhook', function(req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        if (event.message && event.message.text && event.sender.id != 724239601085737) {
+        if (event.message && event.message.text) {
             init(event.sender.id, event.message.id);
             console.log("events: ", events);
         } else {
