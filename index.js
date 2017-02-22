@@ -141,7 +141,7 @@ function askForTime(kuldoId) {
     })
 }
 console.log(schedule);
-var morning = new RecurrenceRule();
+var morning = new schedule.RecurrenceRule;
 morning.hour = 7;
 morning.minute = 45;
 var j = schedule.scheduleJob(morning, function() {
@@ -155,7 +155,7 @@ var j = schedule.scheduleJob(morning, function() {
         }
     })
 })
-var lunch = new RecurranceRule();
+var lunch = new schedule.RecurranceRule;
 lunch.hour = 12;
 lunch.minute = 45;
 var j = schedule.scheduleJob(lunch, function() {
@@ -169,7 +169,7 @@ var j = schedule.scheduleJob(lunch, function() {
         }
     })
 })
-var afterwork = new RecurranceRule();
+var afterwork = new schedule.RecurranceRule;
 afterwork.hour = 15;
 afterwork.minute = 0;
 var j = schedule.scheduleJob(afterwork, function() {
