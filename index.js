@@ -59,6 +59,7 @@ function init(kuldoId, message) {
                 findMessageBasedOnCommand(kuldoId, rows[0].last_command, message);
             } else {
                 console.log(err);
+                console.log();
                 return;
             }
         })
