@@ -143,8 +143,8 @@ function askForTime(kuldoId) {
 console.log(schedule);
 
 var morning = new schedule.RecurrenceRule();
-morning.hour = 15;
-morning.minute = 5;
+morning.hour = 14;
+morning.minute = 7;
 var j = schedule.scheduleJob(morning, function() {
         connection.query('SELECT messageId from myUsers where timing = "745"', function(err, rows, fields) {
             if (!err) {
