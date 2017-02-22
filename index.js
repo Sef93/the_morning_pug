@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var mysql = require('mysql');
-var myTimers = require('schedule');
+var myTimers = require('node-schedule');
 
 var connection = mysql.createConnection({
     host: 'eu-cdbr-west-01.cleardb.com',
@@ -141,7 +141,7 @@ function askForTime(kuldoId) {
     })
 }
 
-var morning = myTimers.RecurranceRule();
+var morning = myTimers.RecurrenceRule();
 morning.hour = 7;
 morning.minute = 45;
 var j = myTimers.scheduleJob(morning, function() {
