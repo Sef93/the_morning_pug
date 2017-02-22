@@ -143,51 +143,50 @@ function askForTime(kuldoId) {
 console.log(schedule);
 
 var morning = new schedule.RecurrenceRule();
-morning.hour = 14;
-morning.minute = 7;
+morning.hour = 16;
+morning.minute = 43;
 var j = schedule.scheduleJob(morning, function() {
-        connection.query('SELECT messageId from myUsers where timing = "745"', function(err, rows, fields) {
-            if (!err) {
-                for (var i = 0; i < rows.length; i++) {
-                    id = rows[0].messageId;
-                    message = "Its a timed message";
-                    sendMessage(id, { text: message });
-                }
+    connection.query('SELECT messageId from myUsers where timing = "745"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
             }
-        })
+        }
     })
-    /*
-    var lunch = new schedule.RecurranceRule();
-    lunch.hour = 12;
-    lunch.minute = 45;
-    var k = schedule.scheduleJob(lunch, function() {
-        connection.query('SELECT messageId from myUsers where timing = "1245"', function(err, rows, fields) {
-            if (!err) {
-                for (var i = 0; i < rows.length; i++) {
-                    id = rows[0].messageId;
-                    message = "Its a timed message";
-                    sendMessage(id, { text: message });
-                }
+})
+var lunch = new schedule.RecurrenceRule();
+lunch.hour = 12;
+lunch.minute = 45;
+var k = schedule.scheduleJob(lunch, function() {
+    connection.query('SELECT messageId from myUsers where timing = "1245"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
             }
-        })
+        }
     })
+})
 
-    var afterwork = new schedule.RecurranceRule();
-    afterwork.hour = 15;
-    afterwork.minute = 0;
-    var l = schedule.scheduleJob(afterwork, function() {
-        console.log();
-        connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
-            if (!err) {
-                for (var i = 0; i < rows.length; i++) {
-                    id = rows[0].messageId;
-                    message = "Its a timed message";
-                    sendMessage(id, { text: message });
-                }
+var afterwork = new schedule.RecurrenceRule();
+afterwork.hour = 15;
+afterwork.minute = 0;
+var l = schedule.scheduleJob(afterwork, function() {
+    console.log();
+    connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
             }
-        })
+        }
     })
-    */
+})
+
 function sendWannaSub(recipientId, name) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
