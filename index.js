@@ -141,6 +141,48 @@ function askForTime(kuldoId) {
     })
 }
 
+var morning = myTimers.RecurranceRule();
+morning.hour = 7;
+morning.minute = 45;
+var j = myTimers.scheduleJob(morning, function() {
+    connection.query('SELECT messageId from myUsers where timing = "745"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
+            }
+        }
+    })
+})
+var lunch = myTimers.RecurranceRule();
+lunch.hour = 12;
+lunch.minute = 45;
+var j = myTimers.scheduleJob(lunch, function() {
+    connection.query('SELECT messageId from myUsers where timing = "1245"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
+            }
+        }
+    })
+})
+var afterwork = myTimers.RecurranceRule();
+afterwork.hour = 17;
+afterwork.minute = 45;
+var j = myTimers.scheduleJob(afterwork, function() {
+    connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
+        if (!err) {
+            for (var i = 0; i < rows.length; i++) {
+                id = rows[0].messageId;
+                message = "Its a timed message";
+                sendMessage(id, { text: message });
+            }
+        }
+    })
+})
 
 function sendWannaSub(recipientId, name) {
     request({
