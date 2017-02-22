@@ -47,7 +47,7 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
-    console.log("init");
+    console.log("init", message);
     if (message == "start") {
         console.log("Start");
         placeUserIntoDb(kuldoId);
