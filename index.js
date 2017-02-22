@@ -74,11 +74,11 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 // generic function sending messages
 function isItIn(senderId) {
     connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
-        if (!err) {
+        if (!err && rows[0].length != 0) {
             return rows[0].name;
         } else {
-            console.log(err);
-            return;
+
+            return "";
         }
     })
 }
