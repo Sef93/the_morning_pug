@@ -89,6 +89,7 @@ function askForSub(kuldoId, name) {
 }
 
 function sendConfirm(kuldoId) {
+    console.log();
     connection.query("SELECT name FROM myUsers where messageId = '" + kuldoId + "';", function(err, rows, fields) {
         var msg = "Kedves " + rows[0].name + "! Sikeresen feliratkoztál a The Morning Pug mopszjaira! Amennyiben szeretnél leiratkozni, úgy egyelőre megszívtad, mert most implementálom:)";
         sendMessage(kuldoId, { text: msg });
@@ -122,15 +123,15 @@ function askForTime(kuldoId) {
                         text: "Hány órakor szeretnéd megkapni a cuki mopszos képeket?:)",
                         buttons: [{
                             type: "postback",
-                            title: "Mopsz a reggeli kávé mellé, 7:45",
+                            title: "7:45",
                             payload: "745"
                         }, {
                             type: "postback",
-                            title: "Mopsz az ebédhez, 12:45",
+                            title: "12:45",
                             payload: "1245"
                         }, {
                             type: "postback",
-                            title: "Mopsz a meló lezárásához, 16:45",
+                            title: "16:45",
                             payload: "1645"
                         }]
                     }
