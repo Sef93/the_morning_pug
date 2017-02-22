@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var mysql = require('mysql');
-var myTimers = require('node-schedule');
+var schedule = require('node-schedule');
 
 var connection = mysql.createConnection({
     host: 'eu-cdbr-west-01.cleardb.com',
@@ -141,10 +141,10 @@ function askForTime(kuldoId) {
     })
 }
 
-var morning = new myTimers.RecurrenceRule();
+var morning = new schedule.RecurrenceRule();
 morning.hour = 7;
 morning.minute = 45;
-var j = myTimers.scheduleJob(morning, function() {
+var j = schedule.scheduleJob(morning, function() {
     connection.query('SELECT messageId from myUsers where timing = "745"', function(err, rows, fields) {
         if (!err) {
             for (var i = 0; i < rows.length; i++) {
@@ -155,10 +155,10 @@ var j = myTimers.scheduleJob(morning, function() {
         }
     })
 })
-var lunch = new myTimers.RecurranceRule();
+var lunch = new schedule.RecurranceRule();
 lunch.hour = 12;
 lunch.minute = 45;
-var j = myTimers.scheduleJob(lunch, function() {
+var j = schedule.scheduleJob(lunch, function() {
     connection.query('SELECT messageId from myUsers where timing = "1245"', function(err, rows, fields) {
         if (!err) {
             for (var i = 0; i < rows.length; i++) {
@@ -169,10 +169,10 @@ var j = myTimers.scheduleJob(lunch, function() {
         }
     })
 })
-var afterwork = new myTimers.RecurranceRule();
+var afterwork = new schedule.RecurranceRule();
 afterwork.hour = 15;
 afterwork.minute = 0;
-var j = myTimers.scheduleJob(afterwork, function() {
+var j = schedule.scheduleJob(afterwork, function() {
     console.log();
     connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
         if (!err) {
