@@ -141,7 +141,8 @@ function askForTime(kuldoId) {
     })
 }
 console.log(schedule);
-var morning = new schedule.RecurrenceRule;
+
+var morning = new schedule.RecurrenceRule();
 morning.hour = 7;
 morning.minute = 45;
 var j = schedule.scheduleJob(morning, function() {
@@ -155,10 +156,11 @@ var j = schedule.scheduleJob(morning, function() {
         }
     })
 })
-var lunch = new schedule.RecurranceRule;
+
+var lunch = new schedule.RecurranceRule();
 lunch.hour = 12;
 lunch.minute = 45;
-var j = schedule.scheduleJob(lunch, function() {
+var k = schedule.scheduleJob(lunch, function() {
     connection.query('SELECT messageId from myUsers where timing = "1245"', function(err, rows, fields) {
         if (!err) {
             for (var i = 0; i < rows.length; i++) {
@@ -169,10 +171,11 @@ var j = schedule.scheduleJob(lunch, function() {
         }
     })
 })
-var afterwork = new schedule.RecurranceRule;
+
+var afterwork = new schedule.RecurranceRule();
 afterwork.hour = 15;
 afterwork.minute = 0;
-var j = schedule.scheduleJob(afterwork, function() {
+var l = schedule.scheduleJob(afterwork, function() {
     console.log();
     connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
         if (!err) {
