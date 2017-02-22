@@ -49,9 +49,24 @@ app.post('/webhook', function(req, res) {
 function init(kuldoId, message) {
     console.log("init", message);
     if (message == "start") {
-        console.log("Start");
         placeUserIntoDb(kuldoId);
+    } else {
+        connection.query("SELECT * from myUsers where messageId = '" + kuldoId + "'", function(err, rows, field) {
+            if (rows[0].last_command == "name") {
+                connection.query("UPDATE myUsers SET name ='" + message + " where messageId = '" + kuldoId + "';");
+                askForSub(kuldoId);
+                return;
+            }
+            if (rows[0].last_command == "sub") {
+                subUser(kuldoId);
+            }
+        })
     }
+}
+
+function askForSub(kuldoId) {
+    connection.query("UPDATE myUsers SET last_command = sub where messageId = '" + kuldoId + "';");
+    sendWannaSub(kuldoId);
 }
 
 function findMessageBasedOnCommand(kuldoId, command, message) {
