@@ -80,7 +80,7 @@ function isItIn(senderId) {
     connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
         console.log(err, rows, field);
         if (!err) {
-            if (rows) {
+            if (rows.length != 0) {
                 console.log("A felhasználó benne van az adatbázisban");
                 string = "yes";
                 return string;
