@@ -47,7 +47,7 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
-    if (!(isItIn(kuldoId))) {
+    if (isItIn(kuldoId) == "no") {
         console.log("i gonna add a new user");
         connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
         var message = "Még nem vagy regisztrálja a rendszerünkben! Milyen névvel szeretnél csatlakozni?";
@@ -79,8 +79,10 @@ function isItIn(senderId) {
         console.log("rows: ", rows[0].name);
         if (!err) {
             if (rows[0]) {
+                console.log("SADASDSADASDASDASDASDSADSADASDSADS");
                 return "yes";
             } else {
+                console.log("HELP HELP HELP");
                 return "no";
             }
         }
