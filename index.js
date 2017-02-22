@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var myTimers = require('schedule');
 
 var connection = mysql.createConnection({
-    host: 'us-cdbr-iron-east-04.cleardb.net',
+    host: 'eu-cdbr-west-01.cleardb.com',
     user: 'b6852e647bd4e8',
     password: '72128df4',
     database: 'heroku_4f4445c9fd24515'
