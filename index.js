@@ -113,7 +113,7 @@ function askForTime(kuldoId) {
         qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: {
-            recipient: { id: recipientId },
+            recipient: { id: kuldoId },
             message: {
                 attachment: {
                     type: "template",
