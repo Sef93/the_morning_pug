@@ -75,13 +75,14 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 }
 // generic function sending messages
 function isItIn(senderId) {
-    connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
-        if (!err && rows[0]) {
-            console.log("bent van, neve:", rows[0].name)
-            return rows[0].name;
-        } else {
-            console.log("nincs benne");
-            return "none";
+    connection.query("SELECT * FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
+        console.log("rows: ", rows);
+        if (!err) {
+            if (rows[0]) {
+                return "yes";
+            } else {
+                return "no";
+            }
         }
     })
 }
