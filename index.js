@@ -72,20 +72,19 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
         //the message is a name;
         console.log();
         connection.query('UPDATE myUsers SET name = "' + message + '", SET command="sub" where messageId = "' + kuldoId + '"');
-        var message = "Szia " + message + "! Szeretnél feliratkozni,hogy minden nap aranyos mopszos üzeneteket és képeket kapj?";
         sendWannaSub(kuldoId, name);
     }
 }
 // generic function sending messages
 function isItIn(senderId) {
-    connection.query("SELECT * FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
+    connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
         if (!err) {
             if (rows[0]) {
-                console.log("SADASDSADASDASDASDASDSADSADASDSADS");
+                console.log("A felhasználó benne van az adatbázisban");
                 string = "yes";
                 return string;
             } else {
-                console.log("HELP HELP HELP");
+                console.log("A felhasználó nincs az adatbázisban");
                 string = "no";
                 return string;
             }
