@@ -47,7 +47,9 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
+    console.log("init");
     if (message == "start") {
+        console.log("Start");
         placeUserIntoDb(kuldoId);
     }
 }
@@ -58,6 +60,7 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 // generic function sending messages
 
 function placeUserIntoDb(kuldoId) {
+    console.log("placing");
     connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
     var message = "Milyen névvel szeretnél bekerülni a rendszerbe?";
     sendMessage(kuldoId, { text: message });
