@@ -35,7 +35,7 @@ app.post('/webhook', function(req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            init(event.sender.id, event.message.id);
+            init(event.sender.id, event.message.text);
             console.log("events: ", events);
         } else {
             if (event.postback && event.postback.payload) {
