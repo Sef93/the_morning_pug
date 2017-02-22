@@ -67,6 +67,7 @@ function init(kuldoId, message) {
 function askForSub(kuldoId) {
     connection.query("UPDATE myUsers SET last_command = sub where messageId = '" + kuldoId + "';");
     sendWannaSub(kuldoId);
+    console.log();
 }
 
 function findMessageBasedOnCommand(kuldoId, command, message) {
