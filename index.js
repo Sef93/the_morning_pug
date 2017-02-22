@@ -82,10 +82,12 @@ function isItIn(senderId) {
         if (!err) {
             if (rows[0]) {
                 console.log("SADASDSADASDASDASDASDSADSADASDSADS");
-                return "yes";
+                string = "yes";
+                return string;
             } else {
                 console.log("HELP HELP HELP");
-                return "no";
+                string = "no";
+                return string;
             }
         }
     })
