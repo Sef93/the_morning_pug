@@ -76,7 +76,6 @@ function findMessageBasedOnCommand(kuldoId, command, message) {
 // generic function sending messages
 function isItIn(senderId) {
     connection.query("SELECT * FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
-        console.log("rows: ", rows[0].name);
         if (!err) {
             if (rows[0]) {
                 console.log("SADASDSADASDASDASDASDSADSADASDSADS");
