@@ -48,6 +48,7 @@ app.post('/webhook', function(req, res) {
 
 function init(kuldoId, message) {
     var name = isItIn(kuldoId);
+    console.log(name);
     if (name == "Undefined") {
         console.log("i gonna add a new user");
         connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
@@ -81,14 +82,14 @@ function isItIn(senderId) {
             if (rows.length != 0) {
                 console.log("A felhasználó benne van az adatbázisban");
                 var name = rows[0].name;
-                return name;
             } else {
                 console.log("A felhasználó nincs az adatbázisban");
                 var name = "Undefined";
-                return name;
+
             }
         }
     })
+    return name;
 }
 
 function sendWannaSub(recipientId, name) {
