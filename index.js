@@ -47,10 +47,8 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
-    console.log();
-    console.log(isItIn(kuldoId));
-    console.log();
-    if (!isItIn(kuldoId)) {
+    var name = isItIn(kuldoId);
+    if (name == "Undefined") {
         console.log("i gonna add a new user");
         connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
         var message = "Még nem vagy regisztrálja a rendszerünkben! Milyen névvel szeretnél csatlakozni?";
@@ -82,10 +80,12 @@ function isItIn(senderId) {
         if (!err) {
             if (rows.length != 0) {
                 console.log("A felhasználó benne van az adatbázisban");
-                return true;
+                var name = rows[0].name;
+                return name;
             } else {
                 console.log("A felhasználó nincs az adatbázisban");
-                return false;
+                var name = "Undefined";
+                return name;
             }
         }
     })
