@@ -39,7 +39,7 @@ app.post('/webhook', function(req, res) {
             console.log("events: ", events);
         } else {
             if (event.postback && event.postback.payload) {
-                console.log("payload:", event.postback.payload);
+                init(event.sender.id, event.postback.payload);
             }
         }
     }
@@ -57,8 +57,25 @@ function init(kuldoId, message) {
                 askForSub(kuldoId, message);
                 return;
             }
-            if (rows[0].last_command == "sub") {
-                subUser(kuldoId);
+            if (rows[0].last_command == "sub" && message == "igen") {
+                connection.query("UPDATE myUsers set is_subbed = 1 , last_command = 'time' where messageId = '" + kuldoId + "';");
+                askForTime(kuldoId);
+                return;
+            }
+            if (rows[0].last_command == "time" && message == "745") {
+                connection.query("UPDATe myUsers set timing = 745, last_command = 'waiting' where messageId = '" + kuldoId + "';");
+                sendConfirm(kuldoId);
+                return;
+            }
+            if (rows[0].last_command == "time" && message == "1245") {
+                connection.query("UPDATe myUsers set timing = 1245, last_command = 'waiting' where messageId = '" + kuldoId + "';");
+                sendConfirm(kuldoId);
+                return;
+            }
+            if (rows[0].last_command == "time" && message == "1645") {
+                connection.query("UPDATe myUsers set timing = 1645, last_command = 'waiting' where messageId = '" + kuldoId + "';");
+                sendConfirm(kuldoId);
+                return;
             }
         })
     }
@@ -68,11 +85,18 @@ function askForSub(kuldoId, name) {
     connection.query("UPDATE myUsers SET last_command = 'sub' where messageId = '" + kuldoId + "';");
     sendWannaSub(kuldoId, name);
     console.log();
+    return;
 }
 
-function findMessageBasedOnCommand(kuldoId, command, message) {
-
+function sendConfirm(kuldoId) {
+    connection.query("SELECT name FROM myUsers where messageId = '" + kuldoId + "';", function(err, rows, fields) {
+        var msg = "Kedves " + rows[0].name + "! Sikeresen feliratkoztál a The Morning Pug mopszjaira! Amennyiben szeretnél leiratkozni, úgy egyelőre megszívtad, mert most implementálom:)";
+        sendMessage(kuldoId, { text: msg });
+        return;
+    })
 }
+
+
 // generic function sending messages
 
 function placeUserIntoDb(kuldoId) {
@@ -82,6 +106,40 @@ function placeUserIntoDb(kuldoId) {
     sendMessage(kuldoId, { text: message });
     return;
 }
+
+function askForTime(kuldoId) {
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: {
+            recipient: { id: recipientId },
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: "Hány órakor szeretnéd megkapni a cuki mopszos képeket?:)",
+                        buttons: [{
+                            type: "postback",
+                            title: "Mopsz a reggeli kávé mellé, 7:45",
+                            payload: "745"
+                        }, {
+                            type: "postback",
+                            title: "Mopsz az ebédhez, 12:45",
+                            payload: "1245"
+                        }, {
+                            type: "postback",
+                            title: "Mopsz a meló lezárásához, 16:45",
+                            payload: "1645"
+                        }]
+                    }
+                }
+            }
+        }
+    })
+}
+
 
 function sendWannaSub(recipientId, name) {
     request({
