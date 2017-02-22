@@ -173,6 +173,7 @@ var afterwork = myTimers.RecurranceRule();
 afterwork.hour = 17;
 afterwork.minute = 45;
 var j = myTimers.scheduleJob(afterwork, function() {
+    console.log();
     connection.query('SELECT messageId from myUsers where timing = "1745"', function(err, rows, fields) {
         if (!err) {
             for (var i = 0; i < rows.length; i++) {
