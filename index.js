@@ -140,7 +140,7 @@ function askForTime(kuldoId) {
         }
     })
 }
-
+console.log(schedule);
 var morning = new schedule.RecurrenceRule();
 morning.hour = 7;
 morning.minute = 45;
