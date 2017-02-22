@@ -47,7 +47,6 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
-    console.log("is it in it?", isItIn(kuldoId));
     if (!(isItIn(kuldoId))) {
         console.log("i gonna add a new user");
         connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
@@ -68,6 +67,7 @@ function init(kuldoId, message) {
 function findMessageBasedOnCommand(kuldoId, command, message) {
     if (command == "name") {
         //the message is a name;
+        console.log();
         connection.query('UPDATE myUsers SET name = "' + message + '", SET command="sub" where messageId = "' + kuldoId + '"');
         var message = "Szia " + message + "! Szeretnél feliratkozni,hogy minden nap aranyos mopszos üzeneteket és képeket kapj?";
         sendWannaSub(kuldoId, name);
