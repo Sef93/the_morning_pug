@@ -47,49 +47,21 @@ app.post('/webhook', function(req, res) {
 });
 
 function init(kuldoId, message) {
-    var name = isItIn(kuldoId);
-    console.log(name);
-    if (name == "Undefined") {
-        console.log("i gonna add a new user");
-        connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
-        var message = "Még nem vagy regisztrálja a rendszerünkben! Milyen névvel szeretnél csatlakozni?";
-        sendMessage(kuldoId, { text: message });
-    } else {
-        connection.query("SELECT last_command FROM myUsers where messageId = '" + kuldoId + "'", function(err, rows, field) {
-            if (!err) {
-                findMessageBasedOnCommand(kuldoId, rows[0].last_command, message);
-            } else {
-                console.log(err);
-                return;
-            }
-        })
+    if (message == "start") {
+        placeUserIntoDb(kuldoId);
     }
 }
 
 function findMessageBasedOnCommand(kuldoId, command, message) {
-    if (command == "name") {
-        //the message is a name;
-        console.log();
-        connection.query('UPDATE myUsers SET name = "' + message + '", SET command="sub" where messageId = "' + kuldoId + '"');
-        sendWannaSub(kuldoId, name);
-    }
+
 }
 // generic function sending messages
-function isItIn(senderId) {
-    connection.query("SELECT name FROM myUsers where messageId = '" + senderId + "';", function(err, rows, field) {
-        console.log(rows);
-        if (!err) {
-            if (rows.length != 0) {
-                console.log("A felhasználó benne van az adatbázisban");
-                var name = rows[0].name;
-            } else {
-                console.log("A felhasználó nincs az adatbázisban");
-                var name = "Undefined";
 
-            }
-        }
-    })
-    return name;
+function placeUserIntoDb(kuldoId) {
+    connection.query(("INSERT INTO myUsers (messageId, last_command) values ('" + kuldoId + "','name');"));
+    var message = "Milyen névvel szeretnél bekerülni a rendszerbe?";
+    sendMessage(kuldoId, { text: message });
+    return;
 }
 
 function sendWannaSub(recipientId, name) {
